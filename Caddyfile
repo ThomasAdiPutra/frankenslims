@@ -1,0 +1,21 @@
+:80
+
+root * /app
+encode zstd br gzip
+
+try_files {path} {path}/ /index.php?{query}
+
+@hiddenFiles path_regexp hiddenFiles ^/(?:\.|[^/]+~)
+respond @hiddenFiles 403
+
+@blockedFiles path_regexp blockedFiles \.(engine|att|inc|info|install|module|profile|test|po|sh|.*inc\.php|.*sql|theme|tpl(\.php)?|xtmpl|svn-base)$
+respond @blockedFiles 403
+
+file_server
+
+php_server
+
+header {
+	X-XSS-Protection "1; mode=block"
+	X-Frame-Options "SAMEORIGIN"
+}
