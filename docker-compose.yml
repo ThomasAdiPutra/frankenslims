@@ -2,7 +2,7 @@ services:
   app:
     image: alfinauzikri/frankenslims:latest
     ports:
-      - "8888:80"
+      - "80"
     volumes:
       - ./app:/app
 
@@ -10,10 +10,10 @@ services:
     image: mariadb:10.3
     restart: always
     environment:
-      MYSQL_DATABASE: slims
-      MYSQL_USER: slims
-      MYSQL_PASSWORD: slims
-      MYSQL_ROOT_PASSWORD: slims
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - dbslims:/var/lib/mysql
 
@@ -23,10 +23,10 @@ services:
     profiles:
       - tools
     ports:
-      - "8889:80"
+      - "80"
     environment:
       PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: slims
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       UPLOAD_LIMIT: 200M
       PHP_UPLOAD_MAX_FILESIZE: 200M
       PHP_POST_MAX_SIZE: 200M
