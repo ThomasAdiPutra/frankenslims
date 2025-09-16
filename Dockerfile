@@ -1,12 +1,16 @@
 FROM dunglas/frankenphp:php8.4-alpine
 
 RUN apk add --no-cache \
-    zip \
-    yaz \
-    yaz-dev \
+    build-base \
     icu-dev \
     oniguruma-dev \
-    autoconf g++ make
+    autoconf g++ make wget
+
+# Build yaz dari source
+RUN wget http://ftp.indexdata.dk/pub/yaz/yaz-5.34.0.tar.gz \
+ && tar -xvzf yaz-5.34.0.tar.gz \
+ && cd yaz-5.34.0 \
+ && ./configure && make && make install
     
 RUN install-php-extensions \
     pdo_mysql \
