@@ -1,4 +1,4 @@
-FROM dunglas/frankenphp:php8.4-alpine
+FROM dunglas/frankenphp:php8.3-alpine
 
 RUN apk add --no-cache \
     build-base \
