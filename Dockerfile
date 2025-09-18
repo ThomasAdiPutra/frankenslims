@@ -18,7 +18,8 @@ RUN install-php-extensions \
     gd \
     gettext \
     mbstring \
-    intl
+    intl \
+    exif
 
 COPY Caddyfile /etc/frankenphp/Caddyfile
 
